@@ -1,0 +1,100 @@
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    id("com.google.dagger.hilt.android")
+    id("kotlin-kapt")
+}
+
+android {
+    namespace 'com.example.currencyconverter'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId "com.example.currencyconverter"
+        minSdk 24
+        targetSdk 35
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+  /*  kapt {
+        verbose = true
+        showProcessorTimings = true
+    }
+*/
+    buildFeatures {
+        viewBinding true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+}
+
+dependencies {
+
+    implementation libs.androidx.core.ktx
+    implementation libs.androidx.appcompat
+    implementation libs.material
+    implementation libs.androidx.activity
+    implementation libs.androidx.constraintlayout
+    testImplementation libs.junit
+    androidTestImplementation libs.androidx.junit
+    androidTestImplementation libs.androidx.espresso.core
+
+    // Remove androidx-hilt-lifecycle-viewmodel and use these instead
+    implementation libs.dagger.hilt.android
+    kapt libs.dagger.hilt.android.compiler
+
+    // Updated Hilt-related dependencies
+    implementation 'androidx.hilt:hilt-navigation-compose:1.2.0'
+    kapt 'androidx.hilt:hilt-compiler:1.2.0'
+
+/*
+    implementation libs.androidx.lifecycle.viewmodel.ktx
+    implementation libs.androidx.lifecycle.livedata.ktx
+    implementation libs.androidx.lifecycle.runtime.ktx
+*/
+
+
+
+    // Hilt
+/*
+    implementation libs.dagger.hilt.android
+    kapt libs.dagger.hilt.android.compiler
+    implementation libs.androidx.hilt.lifecycle.viewmodel
+    kapt libs.androidx.hilt.compiler
+*/
+
+    // Activity KTX for viewModels()
+    implementation libs.androidx.activity.ktx
+
+    // Architectural Components
+    implementation libs.androidx.lifecycle.viewmodel.ktx
+
+    // Lifecycle
+    implementation libs.androidx.lifecycle.livedata.ktx
+    implementation libs.androidx.lifecycle.runtime.ktx
+
+    // Retrofit
+    implementation libs.retrofit
+    implementation libs.retrofit.converter.gson
+    implementation libs.okhttp
+
+    // Coroutines
+    implementation libs.kotlinx.coroutines.core
+    implementation libs.kotlinx.coroutines.android
+
+}
